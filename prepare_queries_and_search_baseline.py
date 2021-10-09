@@ -7,7 +7,7 @@ import os, json
 
 queries_path = "resources/queries.xml"
 indexes_path = "indexes/FSP95_json"
-output_path = "outputs/run_FSP95_json.tsv"
+output_path = "outputs/run_FSP95_json_baseline.txt"
 
 # Load queries file
 with open(f"{queries_path}", encoding="utf-8") as fp:
@@ -24,11 +24,12 @@ searcher.set_language('ptbr')
 lines = []
 
 for num, pttitle in zip(nums, pttitles):
-    hits = searcher.search(pttitle, k=100)
+    hits = searcher.search(pttitle.text, k=100)
+    print(pttitle.text)
 
     for i in range(len(hits)):
         #print(f'{i+1:2} {hits[i].docid:4} {hits[i].score:.5f}')
-        lines.append([num.text, "Q0", hits[i].docid, i, hits[i].score, "jonas"])
+        lines.append([num.text, "Q0", hits[i].docid, i, f"""{hits[i].score:.6f}""", "jonas"])
 
 os.makedirs("outputs", exist_ok=True)
 

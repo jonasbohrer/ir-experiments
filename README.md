@@ -12,8 +12,10 @@ Execution:
 
 1. access the base path of the repo: `cd <your_git_path/ir-experiments>`
 
-1. run: `python prepare_files.py` and verify that a `resources/<file_name>_json` dir has been generated.
+2. run: `python prepare_files.py` and verify that a `resources/<file_name>_json` directory has been generated with a json collection version of the original document collection.
 
-2. run: `python -m pyserini.index -collection JsonCollection -generator DefaultLuceneDocumentGenerator -language ptbr -threads 1 -input resources/FSP95_json -index indexes/FSP95_json -storePositions -storeDocvectors -storeRaw` and verify that a `indexes/<file_name>_json` index dir has been generated.
+3. run: `python -m pyserini.index -collection JsonCollection -generator DefaultLuceneDocumentGenerator -language ptbr -threads 1 -input resources/FSP95_json -index indexes/FSP95_json -storePositions -storeDocvectors -storeRaw` and verify that a `indexes/<file_name>_json` indexes directory has been generated.
 
-3. run: `prepare_queries_and_search.py` and verify the output file in `outputs/<filename>.tsv`
+4. run: `python prepare_queries_and_search_baseline.py` and verify the output file in `outputs/<filename>.txt`.
+
+5. run: `python prepare_queries_and_search_improved.py` and verify the output file in `outputs/<filename>.txt` (change the parameters in the code to perform the intended tests).
